@@ -32,9 +32,11 @@ class CorsTest {
                 String.class
         );
 
-        // Verify the response status (should be 200 or 404 depending on data availability)
-        assertTrue(response.getStatusCode().is2xxSuccessful() || response.getStatusCode() == HttpStatus.NOT_FOUND,
-                "Response should be successful or not found");
+        // Before SNOMED CT is loaded the endpoint responds with 409 Conflict.
+        assertTrue(response.getStatusCode().is2xxSuccessful()
+                        || response.getStatusCode() == HttpStatus.NOT_FOUND
+                        || response.getStatusCode() == HttpStatus.CONFLICT,
+                "Response should be successful, not found, or conflict when no SNOMED CT data is loaded");
 
         // Check for CORS headers
         HttpHeaders headers = response.getHeaders();

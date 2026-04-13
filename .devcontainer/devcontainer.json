@@ -1,6 +1,8 @@
 {
   "name": "snowstorm-lite",
-  "image": "mcr.microsoft.com/devcontainers/java:1-17-bookworm",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
   "forwardPorts": [8080],
   "portsAttributes": {
     "8080": {
@@ -12,12 +14,12 @@
     "MAVEN_OPTS": "-Xmx1g"
   },
   "remoteEnv": {
-    "PATH": "${containerEnv:PATH}:/home/vscode/.local/bin"
+    "PATH": "${containerEnv:PATH}:/home/vscode/.opencode/bin"
   },
   "mounts": [
     "source=snowstorm-lite-maven-cache,target=/home/vscode/.m2,type=volume"
   ],
-  "postCreateCommand": "bash -lc 'export OPENCODE_INSTALL_DIR=/home/vscode/.local/bin && curl -fsSL https://opencode.ai/install | bash && mvn -DskipTests compile'",
+  "postCreateCommand": "bash -lc 'curl -fsSL https://opencode.ai/install | bash && source ~/.bashrc && mvn -DskipTests compile'",
   "customizations": {
     "vscode": {
       "extensions": [
