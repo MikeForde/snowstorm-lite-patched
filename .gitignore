@@ -1,4 +1,5 @@
 .*
+!.devcontainer
 target
 lucene-index
 test-lucene-index
