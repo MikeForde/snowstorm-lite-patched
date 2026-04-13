@@ -46,6 +46,28 @@ A fast FHIR Terminology Server for SNOMED CT with a small memory footprint.
 ## Quick Start
 Choose an admin password and replace `yourAdminPassword` values in the following commands.
 
+### Run Locally with Java
+Build the application:
+```
+mvn clean package
+```
+
+Run the packaged jar:
+```
+export ADMIN_PW="yourAdminPassword"
+java -Xmx1g -jar target/snowstorm-lite-2.3.1.jar --admin.password="$ADMIN_PW"
+```
+
+The FHIR interface will be available at http://localhost:8080/fhir.
+
+To load a SNOMED CT package after startup:
+```
+curl -u admin:yourAdminPassword \
+  --form file=@SnomedCT_InternationalRF2_PRODUCTION_20250101T120000Z.zip \
+  --form version-uri="http://snomed.info/sct/900000000000207008/version/20250101" \
+  http://localhost:8080/fhir-admin/load-package
+```
+
 ### Option 1: Using a SNOMED Syndication Service
 If you have access to the SNOMED International MLDS service then Snowstorm Lite can download a release automatically from there.
 
