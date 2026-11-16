@@ -10,6 +10,9 @@
       "onAutoForward": "notify"
     }
   },
+  "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+  },
   "containerEnv": {
     "MAVEN_OPTS": "-Xmx1g"
   },
